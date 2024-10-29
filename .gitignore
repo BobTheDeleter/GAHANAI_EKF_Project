@@ -1,0 +1,7 @@
+PC_reader/.vscode/
+*.exe
+*.ilk
+*.obj
+*.pdb
+PC_reader/inc/
+PC_reader/out.csv

@@ -5,3 +5,4 @@ PC_reader/.vscode/
 *.pdb
 PC_reader/inc/
 PC_reader/out.csv
+.vscode/

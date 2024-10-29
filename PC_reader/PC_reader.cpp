@@ -23,11 +23,6 @@ int msgLen;
 uint64_t iTOW;
 bool iTOWFlag = false;
 imuData imudata;
-struct IntGyro {
-    float x;
-    float y;
-    float z;
-} intGyro;
 gpsCoordinate gpscoordinate;
 gpsVelocity gpsvelocity;
 

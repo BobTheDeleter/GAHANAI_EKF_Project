@@ -118,13 +118,7 @@ void UBX_calculate_checksum(uint8_t* array, unsigned int array_start, unsigned i
   }
 }
 
-enum GPSmsgType {
-  VELNED,
-  POSLLH,
-  NOGPS
-};
-
-GPSmsgType readGPSFromSerial() {
+void readGPSFromSerial() {
   if (Serial2.available()) { // If GPS data is available
     byte GPS_info_char = Serial2.read();  // Read it and store as HEX char
 
@@ -188,14 +182,7 @@ GPSmsgType readGPSFromSerial() {
               uint64ToBytes.value = nav.iTOW;
               Serial.write(uint64ToBytes.bytesArr, sizeof(uint64_t));
               Serial.write('\n');
-              return VELNED;
             }
-            else {// when checksum error set speed = 0
-              // spd_kts = 0;
-              // ground_speed = 0;
-              // heading = 0;
-            }
-
             break;
           
           // Not using NMEA sentences for LLA
@@ -251,8 +238,6 @@ GPSmsgType readGPSFromSerial() {
       } // end final character received
     } // end the message is already started and I got a new character
   } // end If GPS data is available
-
-  return NOGPS;
 } // end loop
 
 #endif

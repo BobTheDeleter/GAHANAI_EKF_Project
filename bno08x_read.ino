@@ -62,21 +62,13 @@ void setIMUReports() {
   // }
 }
 
-enum IMUmsgType {
-  GYRO,
-  ACC,
-  MAG,
-  INTGYR,
-  NOIMU
-};
-
-IMUmsgType readIMU() {
+void readIMU() {
   if (bno08x.wasReset()) {
     setIMUReports();
   }
 
   if (!bno08x.getSensorEvent(&sensorValue)) {
-    return NOIMU;
+    return;
   }
 
   switch (sensorValue.sensorId) {
@@ -94,7 +86,7 @@ IMUmsgType readIMU() {
       Serial.write(floatToBytes.bytesArr, sizeof(float));
       Serial.write('\n');
 
-      return GYRO;
+      return;
       break;
 
     case SH2_MAGNETIC_FIELD_CALIBRATED:
@@ -111,7 +103,7 @@ IMUmsgType readIMU() {
       Serial.write(floatToBytes.bytesArr, sizeof(float));
       Serial.write('\n');
 
-      return MAG;
+      return;
       break;
 
     case SH2_LINEAR_ACCELERATION:
@@ -128,7 +120,7 @@ IMUmsgType readIMU() {
       Serial.write(floatToBytes.bytesArr, sizeof(float));
       Serial.write('\n');
 
-      return ACC;
+      return;
       break;
 
     // need to integrate twice to get rpy, not a good test
@@ -146,7 +138,7 @@ IMUmsgType readIMU() {
     //   Serial.write(floatToBytes.bytesArr, sizeof(float));
     //   Serial.write('\n');
 
-    //   return INTGYR;
+    //   return;
   }
 }
 
